@@ -22,10 +22,16 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
 
+#include <stdlib.h>
+#include <stdio.h>
 #include <X11/Xlib.h>
 
 int main(char **argv, int argc) {
     Display *display = XOpenDisplay(NULL);
+    if (!display) {
+        printf("Could not connect to X server.\n");
+        exit(1);
+    }
     Window w = DefaultRootWindow(display);
     XClientMessageEvent e;
     e.type = ClientMessage;
